@@ -13,3 +13,5 @@ Throughout the process, GluCINDa generates detailed documentation (if configured
 
 # Can I use GluCINDa for my research?
 Absolutely! However, the GluCINDa development team takes no responsibility for the accuracy or completeness of the extracted data. If you find GluCINDa helpful, we would also appreciate it if you could cite our work in your research.
+
+> Hier könnte ihre bib-Citation stehen :D 
