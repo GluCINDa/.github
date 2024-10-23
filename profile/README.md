@@ -1,7 +1,7 @@
 # What is GluCINDa?
 GluCINDa is a Python-based application developed to improve the accuracy of research involving Continuous Glucose Monitoring (CGM) data. Typically, such data are downloaded by patients from manufacturer portals, which often leads to significant heterogeneity in file structures (.csv, .txt, or .xlsx). These variations include differences in the number and order of columns, header languages, units of measurement, and other aspects. In our experience, some files even change structure multiple times within the same dataset. This complexity makes importing such data a challenge. GluCINDa was born from the desire to create a precise and efficient tool for extracting the valuable CGM data (hidden) within these files.
 
-<img src="[Assets/icon.png](https://github.com/GluCINDa/.github/blob/main/GluCINDa_logo_concept.jpg)" width="200">
+<img src="[https://github.com/GluCINDa/.github/blob/main/GluCINDa_logo_concept.jpg]" width="200">
 
 # How does GluCINDa work?
 The core principle behind GluCINDa is simple: "**If data are human-readable, they should be machine-readable.**" Instead of relying on AI, GluCINDa employs a statistical approach to first analyze the file and determine whether a row is nonsensical, a header, or actual data. It then isolates any columns that may contain glucose-related information. This is determined using two criteria: 1) the column header must relate to glucose, and 2) the values must be within a plausible blood glucose range. These extracted data are saved in a new file called parsed_all.csv.
