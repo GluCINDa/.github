@@ -1,5 +1,5 @@
 
-<a href="url"><img src="https://github.com/GluCINDa/.github/blob/main/GluCINDa_logo_Schriftzug_V3.png" align="center" height="143" width="405" ></a>
+<a href="url"><img src="https://github.com/GluCINDa/.github/blob/main/GluCINDa_logo_Schriftzug_V3.png" align="center" height="143" width="304" ></a>
 
 
 
