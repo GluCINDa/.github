@@ -13,6 +13,8 @@ No! GluCINDa is a research tool, not a medical device, and therefore must not be
 GluCINDa employs an algorithmic approach (rather than rely on AI) to extract glucose values and corresponding timestamp from a multitude of different CGM exports. GluCINDa analyzes each file row-by-row and identifies potential CGM values if a header above the respective cell contains a glucose-related keyword (like "gluc" or "CGM") and the actual value is a number with a maximum of three digits or a string (like "high" or "low"). A potential CGM value is confirmed and stored if a corresponding complete timestamp (date and time) is found. If available, GluCINDa stores additional information (device ID, sequence information other than a timestamp). In any case, the name of the glucose-related header and the file name is saved with each extracted CGM value.
 
 # (How) do I need to prepare the input files?
+One manufacturer per file!!!!!
+
 GluCINDa extracts the participant ID from the file name (the first characters followed by an underscore). This means that if you do pseudonymization, you do not have to open the CGM files and manually change participants' real names there (manually changing anything in a datafile is never a good look, after all). You or the person doing the pseudonymization only has to change the file name accordingly. Here is an example: 
 
 > pid0001_CGMdownload.csv
