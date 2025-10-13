@@ -12,6 +12,12 @@ No! GluCINDa is a research tool, not a medical device, and therefore must not be
 # How does GluCINDa work?
 GluCINDa employs an algorithmic approach (rather than rely on AI) to extract glucose values and corresponding timestamp from a multitude of different CGM exports. GluCINDa analyzes each file row-by-row and identifies potential CGM values if a header above the respective cell contains a glucose-related keyword (like "gluc" or "CGM") and the actual value is a number with a maximum of three digits or a string (like "high" or "low"). A potential CGM value is confirmed and stored if a corresponding complete timestamp (date and time) is found. If available, GluCINDa stores additional information (device ID, sequence information other than a timestamp). In any case, the name of the glucose-related header and the file name is saved with each extracted CGM value.
 
+## What CGM files can GluCINDa process?
+
+- can process anything, will skip files/imports
+- needs date, time, CGM value in aptly named column
+- tested with: LibreView, Clarity, CareLink, iCan app, Glooko
+
 # (How) do I need to prepare the input files?
 One manufacturer per file!!!!!
 
