@@ -71,15 +71,15 @@ input format expectations, output schema description, and example workflows.
 
 ## Citation
 <!-- ============================================================ -->
-<!-- TODO: Replace Citation                                       -->
+<!-- TODO: Update Citation                                       -->
 <!--                                                              -->
 <!-- ============================================================ -->
 
 When using GluCINDa in your project, please cite:
 
-> PM Baumann, A Grebien, C Buhlheller, C Taucher, F Posch, L Bally, and JK Mader.
-> **GluCINDa (Glucose: Coherent Import. Neat Data). A tool for automatic parsing of CGM
-> data for research.** *Proceedings of ABCD 2024*, August 2024.
+> PM Baumann, C Buhlheller, A Grebien, C Taucher, F Posch, L Bally, and JK Mader.
+> **GluCINDa (Glucose: Coherent Import. Neat Data.) An Open-Source Tool for the Consolidation of
+> Continuous Glucose Monitoring Data for Research.** *Proceedings of ABCD 2024*, August 2024.
 > URL: http://12.3456/789101112 — DOI: 12.3456/789101112
 
 ---
