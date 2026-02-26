@@ -1,113 +1,115 @@
+# GluCINDa — Glucose: Coherent Import. Neat Data.
 
-<a href="url"><img src="https://github.com/GluCINDa/.github/blob/main/GluCINDa_logo_Schriftzug_V3.png" align="center" height="143" width="304" ></a>
+> **⚠ RESEARCH AND EDUCATION USE ONLY**
+> This software does not have market approval and is intended exclusively for research and
+> educational purposes. It is not intended for use in safety-critical systems or in any
+> environment in which a software error could lead to damage or injury (e.g., for therapy
+> or clinical decision-making purposes). This software is highly experimental and may
+> contain errors. It is provided without any warranty (other than copyright as stated in
+> Article 6 of the EUPL) and use of the software is entirely at your own risk. There is no
+> obligation to provide updates, maintenance, or support.
 
+---
 
+## Overview
 
-# What is GluCINDa?
-GluCINDa (Glucose: Coherent Import. Neat Data.) is a Python-based application developed to improve the data quality in research involving Continuous Glucose Monitoring (CGM). The fact that there are several CGM manufacturers, various device types and generations and different methods of exporting the data (aside from different languages, units and file formats) leads to a significant heterogeneity in file and table structures, especially when working with user-generated CGM exports. Moreover, data exports are not always machine-readable (i.e. formally structured), the worst case we encountered being a change in table structure within the same document. Until now, importing and harmonizing CGM data for statistical analysis required a lot of manual coding and checking which took up an undue share of the respective overall project time and has also lead to data loss. GluCINDa was created to handle such a complicated database with efficiency, accuracy and transparency and, thus, improve the quality of diabetes research as a whole. 
+GluCINDa is a manufacturer-agnostic continuous glucose monitoring (CGM) data ingestion
+layer designed for research applications. It provides automated parsing, normalization,
+and structured export of raw CGM data exports across heterogeneous device manufacturers
+and file formats. GluCINDa does not perform glucose analysis; it produces clean,
+and traceable output suitable for downstream processing and statistical analysis.
 
-## Is GluCINDa a medical device?
-No! GluCINDa is a research tool, not a medical device, and therefore must not be used in any clincal capacity whatsoever. 
+Key design principles:
 
-# How does GluCINDa work?
-GluCINDa employs an algorithmic approach (rather than rely on AI) to extract glucose values and corresponding timestamp from a multitude of different CGM exports. GluCINDa analyzes each file row-by-row and identifies potential CGM values if a header above the respective cell contains a glucose-related keyword (like "gluc" or "CGM") and the actual value is a number with a maximum of three digits or a string (like "high" or "low"). A potential CGM value is confirmed and stored if a corresponding complete timestamp (date and time) is found. If available, GluCINDa stores additional information (device ID, sequence information other than a timestamp). In any case, the name of the glucose-related header and the file name is saved with each extracted CGM value.
+- **Manufacturer-agnostic**: no hardcoded dependencies on any single CGM device or
+  export format
+- **Full traceability**: all transformations are documented; silent data loss is not
+  permitted
+- **Reproducible and deterministic**: identical inputs produce identical outputs
+- **Stable output schema**: downstream analysis pipelines are not broken by upstream
+  format changes
+- **Optimized for real-world data**: handles messy, multi-center, and heterogeneous
+  exports
 
-## What CGM files can GluCINDa process?
+---
 
-- can process anything, will skip files/imports
-- needs date, time, CGM value in aptly named column
-- tested with: LibreView, Clarity, CareLink, iCan app, Glooko
+## Authors and Contributors
 
-# (How) do I need to prepare the input files?
-One manufacturer per file!!!!!
+Software created by and written under the lead of **Petra M. Baumann**
+(Medical University of Graz).
 
-GluCINDa extracts the participant ID from the file name (the first characters followed by an underscore). This means that if you do pseudonymization, you do not have to open the CGM files and manually change participants' real names there (manually changing anything in a datafile is never a good look, after all). You or the person doing the pseudonymization only has to change the file name accordingly. Here is an example: 
+Contributors (by order of appearance):
+- C. Buhlheller
+- A. Grebien
 
-> pid0001_CGMdownload.csv
-
-Because GluCINDa also stores the source file name with each extracted CGM value, you can use the filename to convey other information that you need for your analysis. For example, if you have multiple study phases per participant stored in separate files, you can indicate that in the file name followed by another underscore for easy separation later:
-
-> pid0001_phase1_CGMdownload.csv
-> 
-> pid0001_phase2_CGMdownload.csv
-
-Similarly, you could convey parallel sensors (of different manufacturers):
-
-> pid0001_phase1_sensor1_Libre3_CGMdownload.csv
-> 
-> pid0001_phase1_sensor2_Libre3_CGMdownload.csv
-> 
-> pid0001_phase1_sensor3_G7_CGMdownload.csv
-
-
-# How do I use GluCINDa?
-## Requirements
-1. Python
-2. additional modules: chardet, csv, datetime, glob, openpyxl, multiprocessing, os, pandas, pathlib, pyarrow, pybtex, PySide6, setuptools, statistics, sys, time, traceback, unittest, xlrd
-3. `git` needs to be installed on your system for the installation of GluCINDa
-
+---
 
 ## Installation
-1.  Install missing requirements
-    ```bash
-    pip3 install chardet csv datetime glob openpyxl multiprocessing os pandas pathlib pyarrow pybtex PySide6 setuptools statistics sys time traceback unittest xlrd
-    ```
 
-2.  Install the GluCINDa repository
-   *   `cd` into the directory where you want to install GluCINDa (example: `/glucinda_app/`)
-        ```bash
-        cd /glucinda_app/
-        ```
-        
-   *   Clone the GUI repository , then `cd` into it and install the submodules *generalparser* and *cgm_extractor*
-        ```bash
-        git clone https://github.com/GluCINDa/GluCINDa_GUI.git GluCINDa/
-        cd GluCINDa
-        git submodule init generalparser/
-        git submodule init cgm_extractor/
-        git submodule update --remote
-        ```
+<!-- ============================================================ -->
+<!-- TODO: Replace this section with your existing installation   -->
+<!-- content from the GitHub README.                              -->
+<!-- ============================================================ -->
 
+Requirements and installation instructions to be documented here. Include Python version
+requirements, dependency installation (e.g., `pip install -r requirements.txt`), and any
+environment setup steps.
 
-## Running GluCINDa
-1. Open a terminal and type the following to start GluCINDa's Graphical User Interface (GUI)
+---
 
-  ```bash
-    cd /glucinda_app/GluCINDa
-    python3 glucinda.py
-  ```
+## Usage
 
-2. Provide the filepath to your input folder
-3. GluCINDa automatically suggests an output folder path, but you can choose your own. GluCINDa warns you if the output folder is not empty as it will get overwritten. You have to empty the folder manually to prevent accidentally overwriting files.
-4. In advanced mode, choose:
-   * The format of the combined output file (CSV, XLSX). Deselect both if you only want individual files.
-   * If you want individual file outputs (in addition to the combined output file)
-   * In case you want individual outputs, if you want individual file documentation and in in what format (TXT, HTML). Keep in mind, that HTML files take up much more space than TXT files (they look prettier, however).
+<!-- ============================================================ -->
+<!-- TODO: Replace this section with your existing usage/tutorial -->
+<!-- content from the GitHub README.                              -->
+<!-- ============================================================ -->
 
+Usage instructions and tutorial content to be documented here. Include basic invocation,
+input format expectations, output schema description, and example workflows.
 
-# What is the output of GluCINDa?
+---
 
-## Imported and harmonized data
-- **parsed_all.csv**: 
-- **parsed_all_just_cgm.csv**: GluCINDa identifies columns with a median time interval of either 5 or 15 minutes, which are typical for CGM data, and stores the respective values in a separate file. If you only want the regular CGM data stream without any scanned or calibration values, you can directly use this file. However, we recommend to do plausibility checks on this file before using it in analyses.
-- **parsedNNNN.csv**: If preferred you can (also) get separate imports for each input file. 
+## Citation
+<!-- ============================================================ -->
+<!-- TODO: Replace Citation                                       -->
+<!--                                                              -->
+<!-- ============================================================ -->
 
-## Reports
-- **parsing_report.csv**: For each input file, the parsing report lists the extracted participant ID, the number of lines in the input file, the number of extracted lines and the earliest and latest date in the data.
-- **skipped_files.csv**: The files GluCINDa ignored in your input folder. 
-- **skipped_imports.csv**: CSV and XLSX files that were handled by GluCINDa, but did not yield CGM data. Check this to see if something you expected to have CGM data could not be handled by GluCINDa.
+When using GluCINDa in your project, please cite:
 
-## Documentation of individual files
-- If you choose to get individual imports as well, you can also get documentation (as TXT and/or HTML) for each and every step GluCINDa took to import and harmonize the respective file. You can then trace each extracted value and do some more fine-grained debugging and checking. 
+> PM Baumann, A Grebien, C Buhlheller, C Taucher, F Posch, L Bally, and JK Mader.
+> **GluCINDa (Glucose: Coherent Import. Neat Data). A tool for automatic parsing of CGM
+> data for research.** *Proceedings of ABCD 2024*, August 2024.
+> URL: http://12.3456/789101112 — DOI: 12.3456/789101112
 
+---
 
-# What else?
-- We'd appreciate if you would reference GluCINDa if you use her for a publication: 
-> Hier könnte ihre bib-Citation stehen :D
+## License
 
-- If you find a bug, please let us know (start an issue on Github).
+GluCINDa is licensed under the terms of the **European Union Public Licence v. 1.2
+(EUPL-1.2)**.
 
-- Open source use => *[legal department will advise]*
+You should have received a copy of the EUPL in a separate `LICENSE` file along with
+GluCINDa. If not, see <https://eupl.eu/1.2/en/>.
 
+The EUPL is internationally recognized and written in legally neutral terms, ensuring
+broad applicability beyond the European Union. It is compatible with many widely used
+open-source licenses, facilitating integration of GluCINDa into international projects.
 
-**Thank you for using GluCINDa!**
+**Copyright © 2025 Medical University of Graz. All rights reserved.**
+
+---
+
+## Third-Party Libraries
+
+A list of third-party tools, modules, and libraries used in connection with GluCINDa,
+together with their respective licenses, is provided in the [`NOTICE`](NOTICE) file.
+
+---
+
+## Export Control
+
+The software (including all related documentation) shall be used and communicated in
+compliance with all applicable export control laws. Use by or communication to
+persons or countries restricted by regulatory authorities (according to applicable
+classification and intended use) is strictly prohibited.
