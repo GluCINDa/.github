@@ -39,7 +39,6 @@ Software created by and written under the lead of **Petra M. Baumann**
 (Medical University of Graz).
 
 Contributors (by order of appearance):
-- C. Buhlheller
 - A. Grebien
 
 ---
