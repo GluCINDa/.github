@@ -38,7 +38,6 @@ Key design principles:
 
 Software created and written by:
 - Petra M. Baumann (MUG)
-- Christoph Buhlheller (MUG)
 - Alexander Grebien (MUG)
 
 Acknowledgments: 
