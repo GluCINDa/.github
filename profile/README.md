@@ -22,64 +22,91 @@ and traceable output suitable for downstream processing and statistical analysis
 Key design principles:
 
 - **Manufacturer-agnostic**: no hardcoded dependencies on any single CGM device or
-  export format
+  export structure
 - **Full traceability**: all transformations are documented; silent data loss is not
   permitted
 - **Reproducible and deterministic**: identical inputs produce identical outputs
 - **Stable output schema**: downstream analysis pipelines are not broken by upstream
   format changes
-- **Optimized for real-world data**: handles messy, multi-center, and heterogeneous
-  exports
+- **Optimized for real-world data**: handles heterogeneous CGM exports from multiple
+  manufacturers and download platforms (Validated: Abbott/LibreView, Dexcom/Clarity, Medtronic/CareLink,
+  iCan, Glooko. Provisional: Sibionics, Tandem)
 
 ---
 
-## Authors and Contributors
+## Contributors
 
-Software created by and written under the lead of **Petra M. Baumann**
-(Medical University of Graz).
+Software created and written by:
+- Petra M. Baumann (MUG)
+- Christoph Buhlheller (MUG)
+- Alexander Grebien (MUG)
 
-Contributors (by order of appearance):
-- A. Grebien
+Acknowledgments: 
+- Christian Taucher (MUG)
+- Florian Posch (MUG)
+- Lia Bally (INS)
+- Julia Mader (MUG)
+
+MUG: Medical University of Graz, Austria
+
+INS: Inselspital Bern, Switzerland
 
 ---
 
 ## Installation
 
-<!-- ============================================================ -->
-<!-- TODO: Replace this section with your existing installation   -->
-<!-- content from the GitHub README.                              -->
-<!-- ============================================================ -->
+Download the latest `.whl` file from [GitHub Releases](https://github.com/your-org/glucinda/releases) and install with:
+```bash
+pip install glucinda-1.0.0-py3-none-any.whl
+```
 
-Requirements and installation instructions to be documented here. Include Python version
-requirements, dependency installation (e.g., `pip install -r requirements.txt`), and any
-environment setup steps.
+Then launch with 
+```bash
+glucinda
+```
+
 
 ---
 
 ## Usage
 
-<!-- ============================================================ -->
-<!-- TODO: Replace this section with your existing usage/tutorial -->
-<!-- content from the GitHub README.                              -->
-<!-- ============================================================ -->
+After launching the GUI, you are in Simple Mode. Select the directory containing the input files, accept the suggested or provide an empty output directory
+and press "Run". Switching to Advanced Mode allows for some customization of the documenation and outputs. 
 
-Usage instructions and tutorial content to be documented here. Include basic invocation,
-input format expectations, output schema description, and example workflows.
+---
+
+## Output Schema
+
+GluCINDa produces a semicolon-delimited CSV containing all extracted CGM data with the following columns: 
+
+| Column | Description |
+|--------|-------------|
+| `sid` | Subject identifier, derived from the input file name. |
+| `date` | Date of measurement (`YYYY/mm/dd`). |
+| `time` | Time of measurement (`HH:MM:SS`). |
+| `value_num` | Numeric CGM value. Empty if the source value is non-numeric. |
+| `unit` | Unit of measurement as it appears in the source column header (e.g. `mg/dl`, `mmol/l`); `undefined` if absent. |
+| `value_str` | Non-numeric CGM value (e.g. `High`, `Low`). Empty if the source value is numeric. |
+| `record_type` | CGM record type code distinguishing measurement subtypes (LibreView only). |
+| `record_type_source_column` | Source column for `record_type` (LibreView only). |
+| `manufacturer_assumed` | CGM device manufacturer inferred from the input file structure. |
+| `device_id` | Sensor or transmitter identifier from the input file (LibreView, Clarity, Glooko). |
+| `device_id_source_column` | Source column for `device_id` (LibreView, Clarity, Glooko). |
+| `sequence` | Row-level sequence number as provided by the manufacturer (Clarity, CareLink, iCan). |
+| `sequence_source_column` | Source column for `sequence` (Clarity, CareLink, iCan). |
+| `download_source_assumed` | Download platform inferred from the input file structure. |
+| `source_column` | Column name in the input file from which `value_num` or `value_str` was extracted. |
+| `source_file` | Input file name (and sheet name for XLS/X files). |
+| `notice` | Parsing-related warnings. Empty if no issues were detected. |
+| `further_raw_data_json` | Verbatim source values stored as JSON for full transparency. |
+
+For full details including data types, controlled vocabularies, and transformation notes, see [DATA_DICTIONARY.md](https://github.com/GluCINDa/glucinda-release/DATA_DICTIONARY.md).
 
 ---
 
 ## Citation
-<!-- ============================================================ -->
-<!-- TODO: Update Citation                                       -->
-<!--                                                              -->
-<!-- ============================================================ -->
-
-When using GluCINDa in your project, please cite:
-
-> PM Baumann, C Buhlheller, A Grebien, C Taucher, F Posch, L Bally, and JK Mader.
-> **GluCINDa (Glucose: Coherent Import. Neat Data.) An Open-Source Tool for the Consolidation of
-> Continuous Glucose Monitoring Data for Research.** *Proceedings of ABCD 2024*, August 2024.
-> URL: http://12.3456/789101112 — DOI: 12.3456/789101112
+A manuscript describing GluCINDa is currently under review. In the meantime, please cite 
+the software using the "Cite this repository" button on the [GluCINDa release repository](https://github.com/GluCINDa/glucinda-release).
 
 ---
 
