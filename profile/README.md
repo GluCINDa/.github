@@ -46,7 +46,7 @@ Acknowledgments:
 - Lia Bally (INS)
 - Julia Mader (MUG)
 
-MUG: Medical University of Graz, Austria
+MUG: Medical University of Graz, Austria  
 
 INS: Inselspital Bern, Switzerland
 
@@ -54,19 +54,19 @@ INS: Inselspital Bern, Switzerland
 
 ## Installation
 
-Download the latest `.whl` file from [GitHub Releases](https://github.com/your-org/glucinda/releases) and install with:
+Install from PyPI using pip:
 ```bash
-pip install glucinda-1.0.0-py3-none-any.whl
+pip install glucinda
 ```
 
-Then launch with 
+Then launch with:
 ```bash
 glucinda
 ```
 
+GluCINDa requires Python 3.11 or later.
 
 ---
-
 ## Usage
 
 After launching the GUI, you are in Simple Mode. Select the directory containing the input files, accept the suggested or provide an empty output directory
@@ -99,7 +99,6 @@ GluCINDa produces a semicolon-delimited CSV containing all extracted CGM data wi
 | `notice` | Parsing-related warnings. Empty if no issues were detected. |
 | `further_raw_data_json` | Verbatim source values stored as JSON for full transparency. |
 
-For full details including data types, controlled vocabularies, and transformation notes, see [DATA_DICTIONARY.md](https://github.com/GluCINDa/glucinda-release/DATA_DICTIONARY.md).
 
 ---
 
