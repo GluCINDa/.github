@@ -87,10 +87,23 @@ Support for the following devices is provisional and no formal validation has be
 Other languages, manufacturers, platforms and sensor generations may also be compatible if their export structure conforms to the detection logic implemented in _generalparser_. 
 
 ---
+## Outputs
+The output consists of two consolidated datasets in the output directory root and some additional files: 
+- `parsed_all.csv` contains all extracted data rows (separator: semicolon)
+- `parsed_just_cgm.csv` only contains the regular CGM stream (separator: semicolon)
+- `reports/` `contains additional overviews of extracted data
+  -  `data_overview_by_filename_all_data.xlsx` contains one row per input file and source_column: glucose mean and SD, median time interval between measure-
+ments, number of measurements.
+  - `data_overview_by_filename_cgm_only.xlsx` is structurally identical as above, but only summarises the regular CGM stream data.
+  - `data_overview_by_sid.xlsx` contains one row per subject ID: first and last timestamps,  number of values in `parsed_all.csv`.
+  - `unsupported_files.csv`contains the names of files in the input directory that are not in a format that GluCINDa could process(e.g.,non-tabular files such as images or PDFs).
+  - `supported_files_no_data.csv`: Names of files that were in a recognized format but could not be parsed (e.g. empty files, unsupported structures).
+- `single_files_and_docs/` contains separate outputs and detailed documentation for each input file
+  - `[sid]_parsed[proc.no].csv` is structurally identical to the full dataset, but contains only the extracted data from the respective input file.
+  - `[sid]_parsed[proc.no]_documentation.html` is a line-by-line documentation of the parsing process, conveniently formatted. 
+  - `[sid]_parsed[proc.no]_documentation.txt` is the identical documentation in simpler format. 
 
-## Output Schema
-
-GluCINDa produces a semicolon-delimited CSV containing all extracted CGM data with the following columns: 
+### Output Schema for extracted data files
 
 | Column | Description |
 |--------|-------------|
@@ -112,6 +125,7 @@ GluCINDa produces a semicolon-delimited CSV containing all extracted CGM data wi
 | `source_file` | Input file name (and sheet name for XLS/X files). |
 | `notice` | Parsing-related warnings. Empty if no issues were detected. |
 | `further_raw_data_json` | Verbatim source values stored as JSON for full transparency. |
+
 
 
 ---
