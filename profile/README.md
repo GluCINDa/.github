@@ -72,6 +72,20 @@ GluCINDa requires Python 3.11 or later.
 After launching the GUI, you are in Simple Mode. Select the directory containing the input files, accept the suggested or provide an empty output directory
 and press "Run". Switching to Advanced Mode allows for some customization of the documenation and outputs. 
 
+### Supported CGM exports
+GluCINDa currently handles CGM data exports in English and German from the following platforms and device generations:
+- LibreView, Abbott Diabetes Care Inc.: FreeStyle Libre 1, 2, 3, LibreLink
+- Clarity, Dexcom Inc.: G6, G7
+- CareLink, Medtronic MiniMed Inc.: Enlite, Guardian 3, Guardian 4, Simplera
+- iCan app, Sinocare Inc.: iCan i3
+- Glooko, Glooko AB: Abbott and Dexcom devices
+
+Support for the following devices is provisional and no formal validation has been conducted with these data sources yet:
+- Sibionics, SIBIO PTE. LTD.: GS3
+- Tandem, Tandem Diabetes Care Inc.: t:slim X2
+
+Other languages, manufacturers, platforms and sensor generations may also be compatible if their export structure conforms to the detection logic implemented in _generalparser_. 
+
 ---
 
 ## Output Schema
